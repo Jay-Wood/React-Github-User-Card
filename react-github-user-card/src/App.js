@@ -25,8 +25,11 @@ class App extends React.Component {
       console.log(res.data)
       return res.data;
     })
-    .then( userData => this.setState({userData: userData})
-    )
+    .then( userData => {
+      this.setState({userData: userData})
+      console.log("UD", userData)
+
+    })
     .catch( err => console.log("catch error:", err))
   }
 
@@ -36,8 +39,8 @@ class App extends React.Component {
         <header className="App-header">
             <h1>GitHub User Cards</h1>
         </header>
-        <div className="card-container">
-          <UserCard />
+        <div className="card-container" >
+          <UserCard userData={this.state.userData} />
           <UserFollowers />
         </div>
       </div>
