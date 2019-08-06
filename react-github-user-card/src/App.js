@@ -2,13 +2,32 @@ import React from 'react';
 import './App.css';
 import UserCard from "./UserCard";
 import UserFollowers from "./UserFollowers";
+import axios from "axios";
 
 class App extends React.Component {
-
-  constructor () {
+  constructor() {
     super();
+    this.state = {
+      userData: {}
+    };
+  }
 
+  //let user input git hub user name
+  //const userInput = ...
 
+  componentDidMount() {
+    this.fetchUserData();
+  }
+
+  fetchUserData = () => {
+    axios.get("https://api.github.com/users/Jay-Wood")
+    .then(res => {
+      console.log(res.data)
+      return res.data;
+    })
+    .then( userData => this.setState({userData: userData})
+    )
+    .catch( err => console.log("catch error:", err))
   }
 
   render() {
